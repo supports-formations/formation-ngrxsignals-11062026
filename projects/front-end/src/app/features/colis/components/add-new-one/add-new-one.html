@@ -1,14 +1,42 @@
 <section class="mx-auto max-w-xl">
 	<header class="mb-6">
 		<h2 class="text-xl font-bold text-slate-900">Nouveau colis</h2>
-		<p class="text-sm text-slate-600">Crée rapidement un envoi de test dans le système.</p>
+		<p class="text-sm text-slate-600">Renseigne les informations d'expédition pour ajouter un colis au suivi.</p>
 	</header>
 
-	<div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-		<p class="text-sm text-slate-600">Action de démonstration: création d'un colis prérempli.</p>
+	<form class="space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm" [formGroup]="form" (ngSubmit)="save()">
+		<div>
+			<label class="mb-1 block text-sm font-semibold text-slate-700" for="name">Nom du colis</label>
+			<input class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-200" id="name" type="text" formControlName="name" placeholder="Ex: Carton client A" />
+			@if (form.controls.name.invalid && form.controls.name.touched) {
+				<p class="mt-1 text-xs font-medium text-rose-600">Le nom est requis (minimum 3 caracteres).</p>
+			}
+		</div>
 
-		<button class="mt-5 inline-flex items-center justify-center rounded-lg bg-cyan-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700" (click)="save()">
+		<div>
+			<label class="mb-1 block text-sm font-semibold text-slate-700" for="weight">Poids (kg)</label>
+			<input class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-200" id="weight" type="number" min="0.1" step="0.1" formControlName="weight" />
+			@if (form.controls.weight.invalid && form.controls.weight.touched) {
+				<p class="mt-1 text-xs font-medium text-rose-600">Le poids doit etre superieur a 0.1 kg.</p>
+			}
+		</div>
+
+		<div>
+			<label class="mb-1 block text-sm font-semibold text-slate-700" for="destination">Destination</label>
+			<input class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-200" id="destination" type="text" formControlName="destination" placeholder="Ex: Lyon" />
+			@if (form.controls.destination.invalid && form.controls.destination.touched) {
+				<p class="mt-1 text-xs font-medium text-rose-600">La destination est requise (minimum 2 caracteres).</p>
+			}
+		</div>
+
+		<button class="inline-flex items-center justify-center rounded-lg bg-cyan-700 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-700 disabled:cursor-not-allowed disabled:bg-slate-300" type="submit" [disabled]="form.invalid">
 			Enregistrer le colis
 		</button>
-	</div>
+
+		@if (hasSaved) {
+			<p class="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">
+				Colis enregistre avec succes.
+			</p>
+		}
+	</form>
 </section>
