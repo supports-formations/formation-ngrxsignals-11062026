@@ -1,1 +1,12 @@
-<p>display-delivers works!</p>
+@let items = delivers();
+
+@for (item of items; track item.id) {
+    <article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+                <h3 class="font-semibold text-slate-900">{{ item.date }}</h3>
+                <p class="text-sm text-slate-500">ID #{{ item.id }}</p>
+            </div>
+        </div>
+    </article>
+}
