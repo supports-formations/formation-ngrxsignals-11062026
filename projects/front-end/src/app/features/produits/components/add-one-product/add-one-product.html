@@ -44,7 +44,7 @@
       <input id="conditionnementName" formControlName="name" />
     </div>
   </div> -->
-  @if(productForm().invalid()) {
+  @if(productForm().invalid() && productForm().submitting()) {
     <div class="error">Form is invalid.</div>
 
     @for (item of productForm().errorSummary(); track $index) {
