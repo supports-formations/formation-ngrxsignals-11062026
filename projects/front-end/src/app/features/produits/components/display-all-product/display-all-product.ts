@@ -16,6 +16,6 @@ export class DisplayAllProduct implements OnInit {
 
   ngOnInit(): void {
     // Dispatch an action to load all products when the component initializes
-    this.store.dispatch(requestProductsFromApiAction());
+    this.store.dispatch(requestProductsFromApiAction({payload: []}  ));
   }
 }

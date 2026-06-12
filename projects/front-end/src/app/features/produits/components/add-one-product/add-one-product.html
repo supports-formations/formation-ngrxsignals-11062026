@@ -23,12 +23,33 @@
     }
   </div>
 
-  
+  <h2>Conditionnements</h2>
+  @for (conditionnement of productForm.conditionnements; track conditionnement; let i = $index) {
+    <div>
+      <label for="conditionnementName">Conditionnement</label>
+
+      <i> {{ conditionnement.value().value()  }}</i>
+
+      <select id="conditionnementName" [formField]="conditionnement.value">
+        <option value="box">Box</option>
+        <option value="bag">Bag</option>
+      </select>
+    </div>
+}
+<button type="button" (click)="addConditionnement()">[+]</button>
+
   <!-- <div formArrayName="conditionnements">
     <div *ngFor="let conditionnement of productForm.get('conditionnements').controls; let i = index" [formGroupName]="i">
       <label for="conditionnementName">Conditionnement Name</label>
       <input id="conditionnementName" formControlName="name" />
     </div>
   </div> -->
+  @if(productForm().invalid()) {
+    <div class="error">Form is invalid.</div>
+
+    @for (item of productForm().errorSummary(); track $index) {
+      <i>{{item.message}}</i>
+    }
+  }
   <button type="submit" [disabled]="productForm().invalid()">Add Product</button>
 </form>

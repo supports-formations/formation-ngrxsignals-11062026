@@ -17,13 +17,18 @@ export class AddOneProduct {
       name: 'Sample Product',
       price: 10,
       type: 'food',
-      conditionnements: [ { id: 1, name: 'Box' }, { id: 2, name: 'Bag' } ]
+      conditionnements: [ { value: 'box', name: 'Box' } ]
     };
   //  this.product.set(product); 
   //  this.productForm().value.set(product);
 
     this.productForm.conditionnements().value.set([...product.conditionnements]);
     //this.productForm.conditionnements().value.update(old => [...old]);
+  }
+
+  addConditionnement(): void {
+    const newConditionnement = { value: '', name: 'Default' };
+    this.productForm.conditionnements().value.update(old => [...old, newConditionnement]);
   }
 
   onSubmit(): void {

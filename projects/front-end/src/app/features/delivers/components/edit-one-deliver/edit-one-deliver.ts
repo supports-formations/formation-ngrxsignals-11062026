@@ -1,5 +1,6 @@
 import { Component, computed, effect, input, linkedSignal, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { Deliver } from '../../models/deliver';
+import { form } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-edit-one-deliver',
@@ -14,6 +15,8 @@ export class EditOneDeliver {
   //protected readonly toEditTemp = computed(() => signal(this.item()));
    // C'est la bonne solution pour récupérer les changements de l'input N°03
   protected readonly toEditTemp = linkedSignal(this.item);
+
+  protected readonly deliverForm = form(this.toEditTemp);
 
   // INTERDIT ;)
   // toPrepareEffect = effect(() => {

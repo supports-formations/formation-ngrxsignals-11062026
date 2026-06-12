@@ -1,12 +1,20 @@
 import { applyEach, min, required, schema, validate } from "@angular/forms/signals";
 
 export interface Conditionnement {
-  id: number;
+  value: string;
   name: string;
 }
 
 export const schemaConditionnement = schema<Conditionnement>(ctx => {
-  min(ctx.id, 1, { message: 'ID must be at least 1' });
+  required(ctx.value, { message: 'Value is required' });
+  validate(ctx.value, ctx => {
+    const validValues = ['box', 'bag', 'bottle'];
+    if (!validValues.includes(ctx.value())) {
+      return { message: `Value must be one of: ${validValues.join(', ')}`, kind: 'invalid_value' };
+    }
+
+    return null; 
+  });
 });
 
 export interface Produit {
