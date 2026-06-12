@@ -11,7 +11,7 @@ export class ProductsEffect {
 
     loadAllProducts$ = createEffect(() => this.actions$.pipe(
         ofType(requestProductsFromApiAction), //1. je chope l'action depuis le component
-        switchMap(() => this.getAllProductsFromApi.getAll()), // 2. je fais ma requete http pour choper les produits
+        switchMap(action => this.getAllProductsFromApi.getAll()), // 2. je fais ma requete http pour choper les produits
         map((products) => successGetProductsFromApiAction({ payload: products })) // 3. je dispatch une action avec les produits en payload pour que le reducer puisse les stocker dans le state
     ));
 }
