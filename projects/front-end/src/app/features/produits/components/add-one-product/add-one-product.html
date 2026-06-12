@@ -1,0 +1,34 @@
+<form [formRoot]="productForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" [formField]="productForm.name" />
+  </div>
+  <div>
+    <label for="price">Price</label>
+    <input id="price" [formField]="productForm.price" type="number" />
+  </div>
+  <div>
+    <label for="type">Type</label>
+    <select id="type" [formField]="productForm.type">
+      <option value="food">Food</option>
+      <option value="drink">Drink</option>
+    </select>
+
+    @if(productForm.type().invalid()) {
+      <div class="error">Type is required.</div>
+
+      @for (item of productForm.type().errors(); track item) {
+        <i>{{item.message}}</i>
+      }
+    }
+  </div>
+
+  
+  <!-- <div formArrayName="conditionnements">
+    <div *ngFor="let conditionnement of productForm.get('conditionnements').controls; let i = index" [formGroupName]="i">
+      <label for="conditionnementName">Conditionnement Name</label>
+      <input id="conditionnementName" formControlName="name" />
+    </div>
+  </div> -->
+  <button type="submit" [disabled]="productForm().invalid()">Add Product</button>
+</form>
